@@ -135,6 +135,38 @@
     </div>
   </section>
 
+  <!-- WEATHER WIDGET -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="weather-card fade-in-scroll" id="weather-card">
+
+        <div class="weather-loading" id="weather-loading">
+          <span class="weather-dot"></span>
+          <span>Getting your local weather&hellip;</span>
+        </div>
+
+        <div class="weather-content" id="weather-content" hidden>
+          <div class="weather-left">
+            <span class="weather-emoji" id="weather-emoji" aria-hidden="true"></span>
+            <div class="weather-temp-group">
+              <span class="weather-temp" id="weather-temp"></span>
+              <span class="weather-unit">&deg;F</span>
+            </div>
+          </div>
+          <div class="weather-right">
+            <p class="weather-condition" id="weather-condition"></p>
+            <p class="weather-location" id="weather-location"></p>
+          </div>
+        </div>
+
+        <div class="weather-error" id="weather-error" hidden>
+          <span id="weather-error-msg">Weather unavailable</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ABOUT STRIP -->
   <div class="about-strip">
     <div class="container">
@@ -179,6 +211,89 @@
       el.style.transition = 'opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
       observer.observe(el);
     });
+
+    // --- Weather Widget ---
+    (function () {
+      var WMO = {
+        0:  { label: 'Clear sky',          emoji: '☀️' },
+        1:  { label: 'Mainly clear',       emoji: '🌤️' },
+        2:  { label: 'Partly cloudy',      emoji: '⛅' },
+        3:  { label: 'Overcast',           emoji: '☁️' },
+        45: { label: 'Foggy',              emoji: '🌫️' },
+        48: { label: 'Freezing fog',       emoji: '🌫️' },
+        51: { label: 'Light drizzle',      emoji: '🌦️' },
+        53: { label: 'Drizzle',            emoji: '🌦️' },
+        55: { label: 'Heavy drizzle',      emoji: '🌧️' },
+        61: { label: 'Light rain',         emoji: '🌧️' },
+        63: { label: 'Rain',               emoji: '🌧️' },
+        65: { label: 'Heavy rain',         emoji: '🌧️' },
+        71: { label: 'Light snow',         emoji: '🌨️' },
+        73: { label: 'Snow',               emoji: '❄️' },
+        75: { label: 'Heavy snow',         emoji: '❄️' },
+        77: { label: 'Snow grains',        emoji: '🌨️' },
+        80: { label: 'Light showers',      emoji: '🌦️' },
+        81: { label: 'Rain showers',       emoji: '🌧️' },
+        82: { label: 'Violent showers',    emoji: '⛈️' },
+        85: { label: 'Snow showers',       emoji: '🌨️' },
+        86: { label: 'Heavy snow showers', emoji: '🌨️' },
+        95: { label: 'Thunderstorm',       emoji: '⛈️' },
+        96: { label: 'Thunderstorm',       emoji: '⛈️' },
+        99: { label: 'Thunderstorm',       emoji: '⛈️' }
+      };
+
+      function cToF(c) { return Math.round(c * 9 / 5 + 32); }
+
+      var loadEl = document.getElementById('weather-loading');
+      var contEl = document.getElementById('weather-content');
+      var errEl  = document.getElementById('weather-error');
+
+      function show(el) {
+        loadEl.hidden = true;
+        contEl.hidden = true;
+        errEl.hidden  = true;
+        el.hidden = false;
+      }
+
+      if (!navigator.geolocation) { show(errEl); return; }
+
+      navigator.geolocation.getCurrentPosition(function (pos) {
+        var lat = pos.coords.latitude;
+        var lon = pos.coords.longitude;
+
+        fetch('https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon + '&current_weather=true')
+          .then(function (r) { if (!r.ok) throw new Error('weather'); return r.json(); })
+          .then(function (d) {
+            var cw   = d.current_weather;
+            var info = WMO[cw.weathercode] || { label: 'Weather', emoji: '🌡️' };
+
+            document.getElementById('weather-emoji').textContent     = info.emoji;
+            document.getElementById('weather-temp').textContent      = cToF(cw.temperature);
+            document.getElementById('weather-condition').textContent = info.label;
+
+            // Reverse geocode via Nominatim
+            fetch('https://nominatim.openstreetmap.org/reverse?lat=' + lat + '&lon=' + lon + '&format=json', { headers: { 'Accept-Language': 'en' } })
+              .then(function (r) { return r.json(); })
+              .then(function (g) {
+                var a    = g.address || {};
+                var city  = a.city || a.town || a.village || a.county || '';
+                var state = a.state || '';
+                document.getElementById('weather-location').textContent = [city, state].filter(Boolean).join(', ');
+              })
+              .catch(function () {
+                document.getElementById('weather-location').textContent = '';
+              });
+
+            show(contEl);
+          })
+          .catch(function () { show(errEl); });
+
+      }, function (err) {
+        if (err.code === 1) {
+          document.getElementById('weather-error-msg').textContent = 'Enable location to see your weather';
+        }
+        show(errEl);
+      }, { timeout: 8000 });
+    }());
   </script>
 
 </body>

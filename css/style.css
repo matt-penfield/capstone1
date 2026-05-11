@@ -566,6 +566,132 @@ a {
 }
 
 /* =========================================
+   WEATHER WIDGET
+   ========================================= */
+
+.weather-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: clamp(1.75rem, 4vw, 2.75rem) clamp(1.75rem, 5vw, 3.5rem);
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+
+.weather-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--accent);
+}
+
+.weather-card:hover { background: #e8e2d8; }
+
+.weather-loading {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  color: var(--muted);
+  font-size: 0.8125rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.weather-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 1.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.weather-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 2rem;
+}
+
+.weather-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.weather-emoji {
+  font-size: clamp(2.75rem, 5vw, 4rem);
+  line-height: 1;
+  user-select: none;
+}
+
+.weather-temp-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.2rem;
+  line-height: 1;
+}
+
+.weather-temp {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 7vw, 5.5rem);
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--fg);
+}
+
+.weather-unit {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--muted);
+  padding-top: 0.5rem;
+}
+
+.weather-right {
+  text-align: right;
+}
+
+.weather-condition {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: -0.015em;
+  color: var(--fg);
+  margin-bottom: 0.35rem;
+  line-height: 1.1;
+}
+
+.weather-location {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.weather-error {
+  color: var(--muted);
+  font-size: 0.8125rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 540px) {
+  .weather-content { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
+  .weather-right { text-align: left; }
+}
+
+/* =========================================
    FOOTER
    ========================================= */
 
