@@ -627,9 +627,16 @@ a {
 }
 
 .weather-emoji {
-  font-size: clamp(2.75rem, 5vw, 4rem);
-  line-height: 1;
+  width: clamp(48px, 7vw, 64px);
+  height: clamp(48px, 7vw, 64px);
+  flex-shrink: 0;
   user-select: none;
+}
+
+.weather-emoji svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .weather-temp-group {
