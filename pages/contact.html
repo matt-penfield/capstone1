@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Matt Penfield</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="site-nav">
+    <div class="container">
+      <a href="../index.html" class="nav-logo">Matt Penfield</a>
+      <ul class="nav-links">
+        <li><a href="work.html">Work</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html" class="active">Get in touch</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- CONTACT HEADLINE -->
+  <section class="contact-hero">
+    <div class="container">
+      <h1 class="contact-headline animate-fade-up delay-1">
+        Let&rsquo;s<br>Work<br><em>Together.</em>
+      </h1>
+    </div>
+  </section>
+
+  <!-- CONTACT GRID -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- Info column -->
+        <div class="fade-in-scroll">
+          <div class="contact-info-label">Email</div>
+          <div class="contact-info-value">
+            <a href="mailto:hello@mattpenfield.com">hello@mattpenfield.com</a>
+          </div>
+
+          <div class="contact-info-label">Location</div>
+          <div class="contact-info-value">United States</div>
+
+          <div class="contact-info-label">Availability</div>
+          <div class="contact-info-value">
+            <span class="availability-dot"></span>Available for projects
+          </div>
+
+          <div class="contact-info-label" style="margin-top: 0.5rem;">Elsewhere</div>
+          <div class="contact-info-value">
+            <a href="#">LinkedIn</a><br>
+            <a href="#">Dribbble</a><br>
+            <a href="#">Read.cv</a>
+          </div>
+        </div>
+
+        <!-- Form column -->
+        <form class="contact-form fade-in-scroll" action="#" method="POST">
+
+          <div class="form-group">
+            <label class="form-label" for="name">Your Name</label>
+            <input class="form-input" type="text" id="name" name="name" placeholder="Jane Smith" autocomplete="name" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address</label>
+            <input class="form-input" type="email" id="email" name="email" placeholder="jane@example.com" autocomplete="email" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="subject">Project Type</label>
+            <input class="form-input" type="text" id="subject" name="subject" placeholder="Brand identity, UI design, creative direction&hellip;">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="message">Tell me about it</label>
+            <textarea class="form-textarea" id="message" name="message" placeholder="What are you working on? What&rsquo;s the challenge? What does success look like?" required></textarea>
+          </div>
+
+          <button type="submit" class="form-submit">Send message &rarr;</button>
+
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <span class="footer-logo">Matt Penfield</span>
+      <ul class="footer-nav">
+        <li><a href="work.html">Work</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <span class="footer-copy">&copy; 2025 Matt Penfield</span>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in-scroll').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(32px)';
+      el.style.transition = 'opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+</html>
