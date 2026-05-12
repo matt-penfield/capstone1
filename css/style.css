@@ -1084,6 +1084,6 @@ a {
   .work-full-grid { grid-template-columns: 1fr; }
   .skills-grid { grid-template-columns: 1fr; }
   .nav-links { gap: 1.5rem; }
-  .nav-links li:last-child { display: none; }
+  .nav-links li:last-child { display: list-item; }
   .footer-copy { width: 100%; }
 }
