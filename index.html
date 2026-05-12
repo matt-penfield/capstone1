@@ -14,10 +14,29 @@
   <nav class="site-nav">
     <div class="container">
       <a href="index.html" class="nav-logo">Matt Penfield</a>
+
+      <!-- WEATHER WIDGET -->
+      <div class="nav-weather" id="weather-card">
+        <span class="nav-weather-label">Local Weather</span>
+        <span class="nav-weather-loading" id="weather-loading">
+          <span class="weather-dot"></span>
+        </span>
+        <span class="nav-weather-content" id="weather-content" hidden>
+          <span class="nav-weather-icon" id="weather-emoji" aria-hidden="true"></span>
+          <span class="nav-weather-temp" id="weather-temp"></span><span class="nav-weather-unit">&deg;F</span>
+          <span class="nav-weather-sep">&middot;</span>
+          <span class="nav-weather-location" id="weather-location"></span>
+          <span id="weather-condition" hidden></span>
+        </span>
+        <span class="nav-weather-error" id="weather-error" hidden>
+          <span id="weather-error-msg"></span>
+        </span>
+      </div>
+
       <ul class="nav-links">
         <li><a href="pages/work.html">Work</a></li>
         <li><a href="pages/about.html">About</a></li>
-        <li><a href="pages/contact.html">Get in touch</a></li>
+        <li><a href="pages/contact.html">Contact</a></li>
       </ul>
     </div>
   </nav>
@@ -128,38 +147,6 @@
           <div class="service-num">03</div>
           <h3 class="service-title">Design Systems</h3>
           <p class="service-desc">Scalable component libraries, governance models, and contribution workflows that teams actually adopt and maintain over time.</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- WEATHER WIDGET -->
-  <section class="section" style="padding-top: 0;">
-    <div class="container">
-      <div class="weather-card fade-in-scroll" id="weather-card">
-
-        <div class="weather-loading" id="weather-loading">
-          <span class="weather-dot"></span>
-          <span>Getting your local weather&hellip;</span>
-        </div>
-
-        <div class="weather-content" id="weather-content" hidden>
-          <div class="weather-left">
-            <span class="weather-emoji" id="weather-emoji" aria-hidden="true"></span>
-            <div class="weather-temp-group">
-              <span class="weather-temp" id="weather-temp"></span>
-              <span class="weather-unit">&deg;F</span>
-            </div>
-          </div>
-          <div class="weather-right">
-            <p class="weather-condition" id="weather-condition"></p>
-            <p class="weather-location" id="weather-location"></p>
-          </div>
-        </div>
-
-        <div class="weather-error" id="weather-error" hidden>
-          <span id="weather-error-msg">Weather unavailable</span>
         </div>
 
       </div>
