@@ -74,7 +74,7 @@ document.querySelectorAll('.fade-in-scroll').forEach(el => {
     var lat = pos.coords.latitude;
     var lon = pos.coords.longitude;
 
-    fetch('https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&latitude=' + lon + '&current_weather=true')
+    fetch('https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon + '&current_weather=true')
       .then(function (r) { if (!r.ok) throw new Error('weather'); return r.json(); })
       .then(function (d) {
         var cw   = d.current_weather;
