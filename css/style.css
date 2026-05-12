@@ -249,11 +249,27 @@ a {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background 0.25s, transform 0.22s;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform 0.22s;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform: translateX(-101%);
+  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: -1;
+}
+
+.btn-primary:hover::before {
+  transform: translateX(0);
 }
 
 .btn-primary:hover {
-  background: var(--accent);
   transform: translateY(-2px);
 }
 
