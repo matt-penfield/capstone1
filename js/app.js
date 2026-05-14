@@ -15,6 +15,27 @@ document.querySelectorAll('.fade-in-scroll').forEach(el => {
   observer.observe(el);
 });
 
+// --- Contact Form ---
+var contactForm = document.querySelector('.contact-form');
+if (contactForm) {
+  contactForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name    = document.getElementById('name').value.trim();
+    var email   = document.getElementById('email').value.trim();
+    var subject = document.getElementById('subject').value.trim();
+    var message = document.getElementById('message').value.trim();
+
+    var mailSubject = subject || 'Message from ' + name;
+    var mailBody    = (name    ? 'Name: '    + name    + '\n' : '')
+                    + (email   ? 'Email: '   + email   + '\n' : '')
+                    + (message ? '\n'         + message        : '');
+
+    window.location.href = 'mailto:hello@mattpenfield.com'
+      + '?subject=' + encodeURIComponent(mailSubject)
+      + '&body='    + encodeURIComponent(mailBody);
+  });
+}
+
 // --- Weather Widget ---
 (function () {
   var SVG = {
